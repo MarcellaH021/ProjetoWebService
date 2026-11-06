@@ -113,11 +113,16 @@ app.post("/produtos/:id/reservas", (req: Request, res: Response) => {
 
   produto.estoque -= quantidade;
 
+  //Parte 2: devolve o preço oficial para Pedidos calcular o total.
   return res.status(200).json({
+    produtoId: produto.id,
     reservado: quantidade,
+    precoUnitario: produto.preco,
     estoqueRestante: produto.estoque
   });
 });
+
+
 
 // Resposta para JSON malformado.
 app.use((err: unknown, _req: Request, res: Response, _next: express.NextFunction) => {
